@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Process Scheduling Simulator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Process Scheduling Simulator</h1>
+
+    <div class="input-section">
+      <div class="input-group">
+        <input type="text" id="processId" placeholder="Process ID" />
+        <input type="number" id="arrivalTime" placeholder="Arrival Time" />
+        <input type="number" id="burstTime" placeholder="Burst Time" />
+        <input type="number" id="priority" placeholder="Priority" />
+        <button onclick="addProcess()">Add Process</button>
+      </div>
+
+      <div class="algorithm-select">
+        <select id="algorithm">
+          <option value="fcfs">FCFS</option>
+          <option value="sjf">SJF (Non-Preemptive)</option>
+          <option value="srtf">SRTF (Preemptive)</option>
+          <option value="priority">Priority (Non-Preemptive)</option>
+          <option value="rr">Round Robin</option>
+        </select>
+        <input type="number" id="timeQuantum" placeholder="Time Quantum" style="display: none;" />
+        <button onclick="startSimulation()">Start Simulation</button>
+      </div>
+    </div>
+
+    <div class="process-table">
+      <table id="processTable">
+        <thead>
+          <tr>
+            <th>Process</th>
+            <th>Arrival Time</th>
+            <th>Burst Time</th>
+            <th>Priority</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Process rows will be added here dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="results">
+      <h2>Gantt Chart</h2>
+      <div id="ganttChart" class="gantt-chart"></div>
+      <div id="results" class="metrics"></div>
+    </div>
+<div class="algorithm-info">
+    <h2>CPU Scheduling Algorithms</h2>
+    
+    <div class="info-card">
+        <h3>FCFS (First Come First Serve)</h3>
+        <p>FCFS is a simple, non-preemptive scheduling algorithm that executes processes in the order they arrive. 
+           Once a process starts, it runs to completion.</p>
+        <div class="algorithm-details">
+            <h4>Key Features:</h4>
+            <ul>
+                <li><strong>FIFO Order:</strong> First process to arrive is executed first</li>
+                <li><strong>Non-Preemptive:</strong> No interruption once a process starts</li>
+                <li><strong>Convoy Effect:</strong> Longer processes delay shorter ones</li>
+                <li><strong>Simple & Fair:</strong> Easy to implement but may lead to high waiting times</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h3>SJF (Shortest Job First)</h3>
+        <p>Executes the process with the shortest burst time first. Non-preemptive version.</p>
+        <div class="algorithm-details">
+            <h4>Key Features:</h4>
+            <ul>
+                <li><strong>Efficient:</strong> Minimizes average waiting and turnaround time</li>
+                <li><strong>Risk of Starvation:</strong> Long processes may wait indefinitely</li>
+                <li><strong>Optimal for:</strong> Batch processing with predictable execution times</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h3>SRTF (Shortest Remaining Time First)</h3>
+        <p>Preemptive version of SJF, prioritizes remaining execution time.</p>
+        <div class="algorithm-details">
+            <h4>Key Features:</h4>
+            <ul>
+                <li><strong>Highly Responsive:</strong> Reduces waiting time for shorter processes</li>
+                <li><strong>Frequent Context Switching:</strong> Increases overhead</li>
+                <li><strong>Starvation Risk:</strong> Longer processes may rarely get CPU time</li>
+                <li><strong>Best For:</strong> Time-sensitive tasks requiring quick execution</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h3>Priority Scheduling</h3>
+        <p>Executes processes based on their priority (lower numbers = higher priority).</p>
+        <div class="algorithm-details">
+            <h4>Key Features:</h4>
+            <ul>
+                <li><strong>Critical Task Handling:</strong> Ensures high-priority completion</li>
+                <li><strong>Starvation Risk:</strong> Low-priority processes may wait indefinitely</li>
+                <li><strong>Aging Solution:</strong> Gradually increases priority of waiting processes</li>
+                <li><strong>Best For:</strong> Real-time systems and critical task scheduling</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h3>Round Robin (RR)</h3>
+        <p>Uses time quantum for fair CPU allocation in cyclic manner.</p>
+        <div class="algorithm-details">
+            <h4>Key Features:</h4>
+            <ul>
+                <li><strong>Fair Allocation:</strong> Ensures no process starvation</li>
+                <li><strong>Time Quantum Critical:</strong> Balance between switching and wait time</li>
+                <li><strong>Ideal For:</strong> Time-sharing systems and interactive applications</li>
+                <li><strong>Performance:</strong> Depends on proper quantum size selection</li>
+            </ul>
+        </div>
+    </div>
+</div>  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
